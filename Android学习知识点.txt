@@ -1,0 +1,219 @@
+1.加密、解密
+对称非对称的区别，https通讯原理
+https://juejin.im/entry/58d7635e5c497d0057fae036
+http://www.jianshu.com/p/e195c6dd3a86
+
+HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。
+HTTPS和HTTP的区别主要如下：
+1、https协议需要到ca申请证书，一般免费证书较少，因而需要一定费用。
+2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl加密传输协议。
+3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。
+4、http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
+
+HTTP使用TCP三次握手建立连接，客户端和服务器需要交换3个包；HTTPS除了TCP的三个包，还要加上ssl握手需要的9个包，所以一共是12个包。
+
+RSA(非对称加密)
+RSA是一种公钥密码体制，现在使用得很广泛。公钥公开，私钥保密，它的加密解密算法是公开的。 由公钥加密的内容可以并且只能由私钥进行解密，并且由私钥加密的内容可以并且只能由公钥进行解密。也就是说，RSA的这一对公钥、私钥都可以用来加密和解密，并且一方加密的内容可以由并且只能由对方进行解密。可用于验证hTTPS中各种密钥的加密。
+
+3DES(对称加密)
+加密使用的密钥和解密使用的密钥是相同的。因此对称加密算法要保证安全性的话，密钥要做好保密，只能让使用的人知道，不能对外公开。常用算法有：DES、AES
+
+散列函数
+或散列算法，又称哈希函数，英语：Hash Function）是一种从任何一种数据中创建小的数字“指纹”的方法。 散列函数把消息或数据压缩成摘要，使得数据量变小，将数据的格式固定下来。 常用算法有：MD5、SHA1
+
+
+2.apk打包原理，打包的流程怎么生成apk
+https://www.jianshu.com/p/85c8ce13fcad
+
+
+* 1 aapt，打包资源文件res、assert、AndroidManifest.xml、Android.jar，生成R.java文件和resource.arsc文件 （assets和res/raw资源被原封不动地打包进APK）
+* 2 aidl工具，输入源码文件、aidl文件、framework.aidl文件，生成相应的.java文件
+* 3 javac，编译工程源码、R.java、AIDL生成的.java文件、库jar文件，生成相应的class文件
+* 4 dx，转换所有的class文件，生成classes.dex文件
+* 5 ApkBuilderMain，打包资源文件、类文件(.dex)、libs文件(.so)，生成未签名的apk
+* 6 jarsigner、signapk，对apk文件进行签名
+* 7 zipalign，对签名后的apk进行对齐处理
+
+签名的作用，签名会签哪些文件
+https://juejin.im/entry/583639d861ff4b0061f6fe86
+
+* 应用程序升级：如果你希望用户无缝升级到新的版本，那么你必须用同一个证书进行签名。这是由于只有以同一个证书签名，系统才会允许安装升级的应用程序。如果你采用了不同的证书，那么系统会要求你的应用程序采用不同的包名称，在这种情况下相当于安装了一个全新的应用程序。如果想升级应用程序，签名证书要相同，包名称要相同！ 
+* 应用程序模块化：Android系统可以允许同一个证书签名的多个应用程序在一个进程里运行，系统实际把他们作为一个单个的应用程序，此时就可以把我们的应用程序以模块的方式进行部署，而用户可以独立的升级其中的一个模块 
+* 代码或者数据共享：Android提供了基于签名的权限机制，那么一个应用程序就可以为另一个以相同证书签名的应用程序公开自己的功能。以同一个证书对多个应用程序进行签名，利用基于签名的权限检查，你就可以在应用程序间以安全的方式共享代码和数据了。 
+http://blog.csdn.net/kickxxx/article/details/18252881
+生成MAINFEST.MF文件，这个文件包含了input jar包内所有文件内容的摘要值。注意，不会生成下面三个文件的摘要值MANIFEST.MF CERT.SF和CERT.RSA
+
+
+
+3.touch 事件分发
+http://www.gcssloop.com/customview/dispatch-touchevent-theory
+安卓上面的View是树形结构的，View可能会重叠在一起，当我们点击的地方有多个View都可以响应的时候，这个点击事件应该给谁呢？为了解决这一个问题，就有了事件分发机制。
+￼
+View的事件分发机制实际上就是一个非常经典的责任链模式
+责任链模式：
+当有多个对象均可以处理同一请求的时候，将这些对象串联成一条链，并沿着这条链传递改请求，直到有对象处理它为止。
+
+
+
+http://blog.csdn.net/ZackChu/article/details/69488296
+红色的箭头代表ACTION_DOWN 事件的流向
+蓝色的箭头代表ACTION_MOVE 和 ACTION_UP 事件的流向
+￼
+
+
+4.开源框架
+* 使用 Retrofit + OkHttp + RxJava + Dagger2 可以说是目前比较潮的一套框架
+
+一、网络框架
+Volley http://blog.csdn.net/guolin_blog/article/details/17482095
+￼
+其中蓝色部分代表主线程，绿色部分代表缓存线程，橙色部分代表网络线程。我们在主线程中调用RequestQueue的add()方法来添加一条网络请求，这条请求会先被加入到缓存队列当中，如果发现可以找到相应的缓存结果就直接读取缓存并解析，然后回调给主线程。如果在缓存中没有找到结果，则将这条请求加入到网络请求队列中，然后处理发送HTTP请求，解析响应结果，写入缓存，并回调主线程。
+
+一个缓存线程 4个网络线程
+特别适合数据量小，通信频繁的网络操作
+
+OkHttp https://www.jianshu.com/p/2388f4883120
+OkHttp是square推出的网络解决方案，俗话说square出品，必属精品，所以我们更有理由相信OkHttp的强大。
+OkHttp 处理了很多网络请求的难题：会从很多常用的连接问题中自动恢复。如果您的服务器配置了多个IP地址，当第一个IP连接失败的时候，OkHttp会自动尝试下一个IP。OkHttp还处理了代理服务器问题和SSL握手失败问题。
+Okhttp是高性能的http库，支持同步、异步，而且实现了spdy、http2、websocket协议，api很简洁易用，和volley一样实现了http协议的缓存
+
+Retrofit 3.0 https://www.jianshu.com/p/a3e162261ab6
+￼
+
+二、事件总线
+EventBus https://www.jianshu.com/p/a040955194fc
+EventBus是一个Android事件发布/订阅框架，通过解耦发布者和订阅者简化Android事件传递，这里的事件可以理解为消息。事件传递既可以用于Android四大组件间通讯，也可以用于异步线程和主线程间通讯等。
+
+优点：
+轻量级，不依赖Context
+父类和子类对通知的监听和处理可以继承，简化代码
+
+缺点：代码阅读性降低、不能跨进程、不能混淆
+优点：比观察者模式耦合性更低，比广播更轻量
+
+
+
+Otto
+RxBus
+
+三、响应式编程
+RxJava https://www.jianshu.com/p/464fa025229e
+在使用这样一种编程模式， 能够带来的最大好处就是代码的简洁明了 可维护性高 最大程度的规避回调地狱
+http://gank.io/post/560e15be2dca930e00da1083
+
+四、注解与依赖注入
+ButterKnife
+https://www.jianshu.com/p/9ad21e548b69
+
+Dagger2 
+https://juejin.im/entry/578cf2612e958a00543c45a4
+https://www.jianshu.com/p/cd2c1c9f68d4/
+https://www.jianshu.com/p/01d3c014b0b1
+
+Inject，Component，Module，Provides是dagger2中的最基础最核心的知识点。奠定了dagger2的整个依赖注入框架。
+* Inject 主要是用来标注目标类的依赖和依赖的构造函数
+* Component 它是一个桥梁，一端是目标类，另一端是目标类所依赖类的实例，它也是注入器（Injector）负责把目标类所依赖类的实例注入到目标类中，同时它也管理Module。
+* Module和Provides 是为解决第三方类库而生的，Module是一个简单工厂模式，Module可以包含创建类实例的方法，这些方法用Provides来标注
+￼
+
+五、DataBinding
+http://connorlin.github.io/2016/07/02/Android-Data-Binding-%E7%B3%BB%E5%88%97-%E4%B8%80-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/
+
+5.进程通信 IPC https://www.jianshu.com/p/6f55ffb6d0ff
+使用Bundle的方式
+使用文件共享的方式
+使用Messenger的方式（AIDL）
+使用ContentProvider的方式
+使用广播接收者（Broadcast）的方式
+使用Socket的方式
+
+AIDL http://blog.csdn.net/u012915455/article/details/53117280
+
+
+6.插件动态加载
+DexClassLoader
+http://blog.csdn.net/u012124438/article/details/53234223
+
+动态加载技术应由以下几个部分组成： 
+1) 应用在运行的时候通过加载一些本地不存在的可执行文件实现一些特定的功能; 
+2) 这些可执行文件是可以替换的; 
+3) 更换静态资源（比如换启动图、换主题、或者用服务器参数开关控制广告的隐藏现实等）不属于动态加载; 
+4) Android中动态加载的核心思想是动态调用外部的 dex文件，极端的情况下，Android APK自身带有的Dex文件只是一个程序的入口（或者说空壳），所有的功能都通过从服务器下载最新的Dex文件完成;
+
+作用  1) 规避APK覆盖安装的升级过程，提高用户体验，顺便能 规避 一些安卓市场的限制；  2) 动态修复应用的一些 紧急BUG，做好最后一道保障；  3) 当应用体积太庞大的时候，可以把一些模块通过动态加载以插件的形式分割出去，这样可以减少主项目的体积，提高项目的编译速度，也能让主项目和插件项目并行开发；  4) 插件模块可以用懒加载的方式在需要的时候才初始化，从而 提高应用的启动速度；  5) 从项目管理上来看，分割插件模块的方式做到了 项目级别的代码分离，大大降低模块之间的耦合度，同一个项目能够分割出不同模块在多个开发团队之间 并行开发，如果出现BUG也容易定位问题；  6) 在Android应用上 推广 其他应用的时候，可以使用动态加载技术让用户优先体验新应用的功能，而不用下载并安装全新的APK；  7) 减少主项目DEX的方法数，65535问题 彻底成为历史（虽然现在在Android Studio中很容易开启MultiDex，这个问题也不难解决）；
+缺点  1) 开发方式可能变得比较诡异、繁琐，与常规开发方式不同；  2) 随着动态加载框架复杂程度的加深，项目的构建过程也变得复杂，有可能要主项目和插件项目分别构建，再整合到一起；  3) 由于插件项目是独立开发的，当主项目加载插件运行时，插件的运行环境已经完全不同，代码逻辑容易出现BUG，而且在主项目中调试插件十分繁琐；  4) 非常规的开发方式，有些框架使用反射强行调用了部分Android系统Framework层的代码，部分Android ROM可能已经改动了这些代码，所以有存在兼容性问题的风险，特别是在一些古老Android设备和部分三星的手机上；  5) 采用动态加载的插件在使用系统资源（特别是Theme）时经常有一些兼容性问题，特别是部分三星的手机；
+
+
+1) DexClassLoader：可以加载jar/apk/dex，可以从SD卡中加载未安装的apk； 
+2) PathClassLoader：要传入系统中apk的存放Path，所以只能加载已经安装的apk文件； 
+
+代理Activity模式
+ProxyActivity + 没注册的Activity = 标准的Activity
+
+DynamicLoadApk是插件化比较优秀的框架
+(1) 宿主：主 App，可以加载插件，也称 Host。  (2) 插件：插件 App，被宿主加载的 App，也称 Plugin，可以是跟普通 App 一样的 Apk 文件。  (3) 组件：指 Android 中的Activity、Service、BroadcastReceiver、ContentProvider，目前 DL 支持Activity、Service以及动态的BroadcastReceiver。  (4) 插件组件：插件中的组件。  (5) 代理组件：在宿主的 Manifest 中注册，启动插件组件时首先被启动的组件。目前包括 DLProxyActivity(代理 Activity)、DLProxyFragmentActivity(代理 FragmentActivity)、DLProxyService(代理 Service)。  (6) Base 组件：插件组件的基类，目前包括 DLBasePluginActivity(插件 Activity 的基类)、DLBasePluginFragmentActivity(插件 FragmentActivity 的基类)、DLBasePluginService(插件 Service 的基类)。
+DynamicLoadApk 原理的核心思想可以总结为两个字：代理。通过在 Manifest 中注册代理组件，当启动插件组件时首先启动一个代理组件，然后通过这个代理组件来构建、启动插件组件。
+
+
+
+7.内存泄漏
+http://blog.csdn.net/u010687392/article/details/49909477
+1. 单例造成的内存泄漏 
+	单例持有ActivityContext，Activity退出时，不会被回收，因为全局生命周期的单例还有Activity的引用
+2. Handler造成的内存泄漏 
+	当这个Activity退出时消息队列中还有未处理的消息或者正在处理消息，而消息队列中的Message持有mHandler实例的引用，mHandler又持有Activity的引用，所以导致该Activity的内存资源无法及时回收，引发内存泄漏
+3.线程造成的内存泄漏 
+	异步任务和Runnable都是一个匿名内部类，因此它们对当前Activity都有一个隐式引用。如果Activity在销毁之前，任务还未完成， 那么将导致Activity的内存资源无法回收，造成内存泄漏。
+4.资源未关闭造成的内存泄漏
+	BraodcastReceiver，ContentObserver，File，Cursor，Stream，Bitmap
+https://academy.realm.io/cn/posts/droidcon-farber-improving-android-app-performance/
+
+
+8.观察者模式
+http://www.jasongj.com/design_pattern/observer/
+观察者模式又叫发布-订阅模式，它定义了一种一对多的依赖关系，多个观察者对象可同时监听某一主题对象，当该主题对象状态发生变化时，相应的所有观察者对象都可收到通知。
+
+观察者模式优点
+* 抽象主题只依赖于抽象观察者
+* 观察者模式支持广播通信
+* 观察者模式使信息产生层和响应层分离
+观察者模式缺点
+* 如一个主题被大量观察者注册，则通知所有观察者会花费较高代价
+* 如果某些观察者的响应方法被阻塞，整个通知过程即被阻塞，其它观察者不能及时被通知
+
+
+9.登录场景账户密码如何加密传输
+http://imweb.io/topic/56d67baaca5e865230c1d4fa
+
+
+10.WindowManager
+https://www.jianshu.com/p/40a9c93b5a8d
+测量——onMeasure()：决定View的大小 
+布局——onLayout()：决定View在ViewGroup中的位置 
+绘制——onDraw()：如何绘制这个View。
+
+//Flag：让window不能获得焦点，这样用户快就不能向该window发送按键事
+FLAG_NOT_FOCUSABLE
+
+11.PackageManager
+￼
+PackageInfo: AndroidManifest.xml文件中所有节点的基类，提供了这些节点的基本信息：label、icon、 meta-data。它并不直接使用，而是由子类继承然后调用相应方法。
+ApplicationInfo: 获取一个特定引用程序中<application>节点的信息。
+ActivityInfo: 获得应用程序中<activity/>或者 <receiver/>节点的信息 。我们可以通过它来获取我们设置的任何属性，包括theme 、launchMode、launchmode等
+
+
+12.ListView
+http://www.cnblogs.com/xiangtailiang/p/3379543.html
+ViewHolder 
+ViewHolder只是将需要缓存的那些view封装好，convertView的setTag才是将这些缓存起来供下次调用
+当你的listview里布局多样化的时候 viewholder的作用就有比较明显的体现了。 当然了，单一模式的布局一样有性能优化的作用 只是不直观。  假如你2种模式的布局 当发生回收的时候 你会用setTag分别记录是哪两种   这两种模式会被封装到viewholder中进行保存方便你下次使用。 VH就是个静态类 与缓存无关的
+
+
+android-Ultra-Pull-To-Refresh 下拉刷新框架
+
+
+
+
+
+
+
