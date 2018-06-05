@@ -1,0 +1,58 @@
+Git 技巧: https://blog.csdn.net/weiniluo/article/details/48266581
+git clone ssh://git@git.blackfi.sh:7999/btc/btc_android.git
+
+// 同步code，并且自动merge
+git pull
+git pull —rebase 
+git status
+
+git add
+
+git reset
+
+// 建立本地新branch，并link到远程branch
+git checkout -b newLocalBranch origin/remoteBranch
+
+git commit -m “comment”
+
+git log
+
+// 当前分支推送到origin主机的对应分支
+git push origin master : origin/master
+
+// 以master分支，新建远端分支
+git push origin master : newbranch
+
+git blame file
+
+git show commitId
+
+git merge —no-ff xxxBranch
+
+//查看本地所有分支
+git branch
+//查看所有分支
+git branch -a
+//查看远端分支
+git branch -r
+// 查看分支链接关系
+git branch -vv
+
+// fork 到自己的仓库
+git fork
+
+// 申请将自己的commit合并到别人的仓库
+git pull request
+
+// 删除本地远端branch
+git branch -r -d origin/xxxBranch
+// 真正删除远端分支
+git push origin :xxxBranch
+
+// 同步code，但不自动merge
+git fetch
+// 同步branch
+git fetch -p
+
+// cherry-pick 多个分支
+git cherry-pick (commitid1..commitid100]

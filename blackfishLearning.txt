@@ -1,0 +1,68 @@
+学习：
+CountDownLatch http://www.importnew.com/15731.html
+https://www.cnblogs.com/dolphin0520/p/3920397.html
+
+ThinDownloadManager https://www.jianshu.com/p/9907aaf02fe0
+百度的埋点 StateService
+
+WebView基础：
+https://www.jianshu.com/nb/23644548
+https://jiandanxinli.github.io/2016-08-31.html
+
+WebView 性能优化
+https://www.jianshu.com/p/95d4d73be3d1
+
+webview 缓存
+WebView主要包括两类缓存，一类是浏览器自带的网页数据缓存，这是所有的浏览器都支持的、由HTTP协议定义的缓存；另一类是H5缓存，这是由web页面的开发者设置的，H5缓存主要包括了App Cache、DOM Storage、Local Storage、Web SQL Database 存储机制等，这里我们主要介绍App Cache来缓存js文件。
+http://unclechen.github.io/2017/05/13/WebView%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%92%8C%E5%BA%94%E7%94%A8/
+https://www.cnblogs.com/bugly/p/7047908.html
+
+WebView三部曲
+https://github.com/guoxiaoxing/android-hybird-app/blob/master/webview/doc/WebView%E4%B8%89%E9%83%A8%E6%9B%B2%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95.md
+
+
+美团点评WebView优化 https://tech.meituan.com/WebViewPerf.html
+腾讯优化
+https://mp.weixin.qq.com/s?__biz=MzIwMzYwMjkzOQ==&mid=2247483938&idx=1&sn=fb9ace2cea643523c0cb3697f59e1747&chksm=96cdacb6a1ba25a013f7aab344d4b226b4501b97b2051fb19cc2213842cf863f9558d63af7ea#rd
+
+
+开源WebView框架： AgentWeb
+https://github.com/Justson/AgentWeb
+AndroidHybirdLib https://github.com/snailycy/AndroidHybridLib 
+
+腾讯X5内核集成 https://www.jianshu.com/p/8a7224ff371a
+
+
+
+
+React Native/H5/Native 区别 https://blog.csdn.net/yczz/article/details/50468181
+
+
+混淆可能的问题 https://www.zhihu.com/question/33184477
+
+intentService https://www.jianshu.com/p/945c97556964
+Android文件 https://www.liaohuqiu.net/cn/posts/storage-in-android/
+
+
+Adb 命令 http://adbshell.com/
+
+组件化：https://www.jianshu.com/p/1b1d77f58e84
+Altas: http://atlas.taobao.org/
+
+LoaderManager: https://blog.csdn.net/iispring/article/details/48834767
+
+gradle 
+maven
+bugly
+Tinker
+
+
+mvp: https://blog.csdn.net/baidu_20596139/article/details/52259848
+
+
+Android WebView 性能轻量优化
+https://www.jianshu.com/p/39a9832847a6
+
+面试题
+https://www.jianshu.com/p/38ab6d856b56
+
