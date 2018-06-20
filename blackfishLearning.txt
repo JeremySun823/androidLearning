@@ -9,6 +9,12 @@ WebView基础：
 https://www.jianshu.com/nb/23644548
 https://jiandanxinli.github.io/2016-08-31.html
 
+WebView英文版大全:
+http://tutorials.jenkov.com/android/android-web-apps-using-android-webview.html#caching-web-resources-in-the-android-device
+
+WebView 常见问题:
+https://www.jianshu.com/p/fea5e829b30a
+
 WebView 性能优化
 https://www.jianshu.com/p/95d4d73be3d1
 
@@ -23,8 +29,10 @@ https://github.com/guoxiaoxing/android-hybird-app/blob/master/webview/doc/WebVie
 
 美团点评WebView优化 https://tech.meituan.com/WebViewPerf.html
 腾讯优化
-https://mp.weixin.qq.com/s?__biz=MzIwMzYwMjkzOQ==&mid=2247483938&idx=1&sn=fb9ace2cea643523c0cb3697f59e1747&chksm=96cdacb6a1ba25a013f7aab344d4b226b4501b97b2051fb19cc2213842cf863f9558d63af7ea#rd
+https://mp.weixin.qq.com/s?__biz=MzIwMzYwMjkzOQ==&mid=2247483938&idx=1&sn=fb9ace2cea643523c0cb3697f59e1747&chksm=96cdacb6a1ba25a013f7aab344d4b226b4501b97b2051fb19cc2213842cf863f9558d63af7ea#rd   
 
+Hybrid
+https://www.cnblogs.com/laughingQing/p/6392455.html
 
 开源WebView框架： AgentWeb
 https://github.com/Justson/AgentWeb
@@ -66,3 +74,6 @@ https://www.jianshu.com/p/39a9832847a6
 面试题
 https://www.jianshu.com/p/38ab6d856b56
 
+
+布局优化：
+https://blog.csdn.net/qq_17766199/article/details/52863741
